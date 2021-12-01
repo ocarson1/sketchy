@@ -18,6 +18,10 @@ public class App extends Application {
   @Override
   public void start(Stage stage) {
     // Create top-level object, set up the scene, and show the stage here.
+    PaneOrganizer main = new PaneOrganizer();
+    Scene scene = new Scene(main.getRoot(), 1000, 700);
+    stage.setScene(scene);
+    stage.show();
   }
 
   public static void main(String[] argv) {
