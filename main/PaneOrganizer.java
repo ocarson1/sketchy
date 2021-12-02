@@ -14,8 +14,8 @@ public class PaneOrganizer {
 
     public PaneOrganizer(){
         this.root = new BorderPane();
-        Control control = new Control(root);
         Canvas canvas = new Canvas(root);
+        Control control = new Control(root, canvas);
     }
 
     public BorderPane getRoot(){

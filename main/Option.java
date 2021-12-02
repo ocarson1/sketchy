@@ -1,5 +1,5 @@
 package sketchy.main;
 
 public enum Option {
-    RECTANGLE, ELLIPSE
+    RECTANGLE, ELLIPSE, LINE, SELECT, FILL
 }
