@@ -41,4 +41,10 @@ public class SketchyEllipse implements SketchyShape {
     public void delete(){
         this.pane.getChildren().remove(ellipse);
     }
+
+    @Override
+    public void move(double x, double y) {
+        this.ellipse.setCenterX(x);
+        this.ellipse.setCenterY(y);
+    }
 }

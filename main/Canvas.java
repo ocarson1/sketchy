@@ -10,7 +10,6 @@ import sketchy.shapes.CurvedLine;
 import sketchy.shapes.SketchyEllipse;
 import sketchy.shapes.SketchyRectangle;
 import sketchy.shapes.SketchyShape;
-
 import java.util.Stack;
 
 public class Canvas {
@@ -48,13 +47,14 @@ public class Canvas {
                 canvasPane.setOnMouseDragged((f) -> line.addPoint(f.getX(),f.getY()));
                 break;
             case SELECT:
-                //if (!this.shapeStack.isEmpty()) {
-                    for (SketchyShape shape : this.shapeStack) {
-                        if (shape.checkContains(point)) {
-                            shape.select();
-                            this.selectedShape = shape;
-                        } else shape.deselect();
-                    }
+                for (SketchyShape shape : this.shapeStack) {
+                    if (shape.checkContains(point)) {
+                        shape.select();
+                        this.selectedShape = shape;
+                    } else shape.deselect();
+                }
+                canvasPane.setOnMouseDragged((f) -> this.selectedShape.move(f.getX(),f.getY()));
+
                 //}
                 break;
             default:
@@ -76,6 +76,5 @@ public class Canvas {
     }
 
     public void setColor(Color color){
-        this.colorSelected = color;
-    }
+        this.colorSelected = color; }
 }

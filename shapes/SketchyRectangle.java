@@ -41,4 +41,10 @@ public class SketchyRectangle implements SketchyShape {
     public void delete(){
         this.pane.getChildren().remove(rect);
     }
+
+    @Override
+    public void move(double x, double y) {
+        this.rect.setX(x);
+        this.rect.setY(y);
+    }
 }

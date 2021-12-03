@@ -10,4 +10,5 @@ public interface SketchyShape {
     boolean checkContains(Point2D point);
     void fill(Color color);
     void delete();
+    void move(double x, double y);
 }
