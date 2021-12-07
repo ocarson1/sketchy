@@ -9,9 +9,9 @@ public class SketchyEllipse implements SketchyShape {
     private Ellipse ellipse;
     private Pane pane;
 
-    public SketchyEllipse(double x, double y, Pane myPane){
-        this.ellipse = new Ellipse(x,y,10,10);
-        this.ellipse.setFill(Color.GREENYELLOW);
+    public SketchyEllipse(Point2D point, Pane myPane){
+        this.ellipse = new Ellipse(point.getX(), point.getY(),80,40);
+        this.ellipse.setFill(Color.PURPLE);
         this.pane = myPane;
         this.pane.getChildren().add(ellipse);
     }
@@ -43,8 +43,48 @@ public class SketchyEllipse implements SketchyShape {
     }
 
     @Override
-    public void move(double x, double y) {
-        this.ellipse.setCenterX(x);
-        this.ellipse.setCenterY(y);
+    public void translate(Point2D prev, Point2D curr) {
+        double dx = curr.getX() - prev.getX();
+        double dy = curr.getY() - prev.getY();
+        this.ellipse.setCenterX(this.ellipse.getCenterX()+dx);
+        this.ellipse.setCenterY(this.ellipse.getCenterY()+dy);
+    }
+
+    @Override
+    public Point2D getCenter(){
+        return new Point2D(this.ellipse.getCenterX(),this.ellipse.getCenterY());
+    }
+
+    @Override
+    public double getRotate(){
+        return this.ellipse.getRotate();
+    }
+
+
+    public double getX(){
+        System.out.println(this.ellipse.getCenterX());
+        return this.ellipse.getCenterX();
+    }
+
+
+    public double getY(){
+        System.out.println(this.ellipse.getCenterY());
+        return this.ellipse.getCenterY();
+    }
+
+    @Override
+    public void rotate(Point2D prev, Point2D curr) {
+        Point2D center = this.getCenter();
+        double theta = Math.atan2(prev.getY()-center.getY(),prev.getX()-center.getX()) - Math.atan2(curr.getY() - center.getY(), curr.getX() - center.getX());
+        System.out.println(theta);
+        this.ellipse.setRotate(Math.toDegrees(-1*theta));
+    }
+
+    @Override
+    public void resize(Point2D point){
+        double dx = point.getX() - this.getCenter().getX();
+        double dy = point.getY() - this.getCenter().getY();
+        this.ellipse.setRadiusX(Math.abs(dx));
+        this.ellipse.setRadiusY(Math.abs(dy));
     }
 }

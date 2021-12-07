@@ -36,7 +36,7 @@ public class Control {
         rb1.setOnAction((ActionEvent e) -> this.canvas.setOption(Option.SELECT));
         rb1.setSelected(true);
         RadioButton rb2 = new RadioButton("Draw with Pen");
-        rb2.setOnAction((ActionEvent e) -> this.canvas.setOption(Option.LINE));
+        rb2.setOnAction((ActionEvent e) -> this.canvas.setOption(Option.PEN));
         RadioButton rb3 = new RadioButton("Draw Rectangle");
         rb3.setOnAction((ActionEvent e) -> this.canvas.setOption(Option.RECTANGLE));
         RadioButton rb4 = new RadioButton("Draw Ellipse");
@@ -47,7 +47,7 @@ public class Control {
         rb4.setToggleGroup(options);
         Label label2 = new Label("Set the Color");
         ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setValue(Color.BLACK);
+        colorPicker.setValue(Color.GREY);
         colorPicker.setOnAction((ActionEvent e) -> canvas.setColor(colorPicker.getValue()));
         this.buttonPane.getChildren().addAll(label1, rb1, rb2, rb3, rb4, label2, colorPicker);
     //}

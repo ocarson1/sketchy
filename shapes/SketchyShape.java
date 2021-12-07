@@ -10,5 +10,12 @@ public interface SketchyShape {
     boolean checkContains(Point2D point);
     void fill(Color color);
     void delete();
-    void move(double x, double y);
+    void translate(Point2D prev, Point2D curr);
+    double getX();
+    double getY();
+    void rotate(Point2D rotatePrev, Point2D rotateCurr);
+    Point2D getCenter();
+    double getRotate();
+    void resize(Point2D pointToResize);
+
 }
