@@ -29,19 +29,18 @@ public class Canvas {
         canvasPane.setOnMouseReleased((g) -> this.handleMouseRelease(g));
         this.shapeStack = new Stack<>();
         this.currOption = Option.SELECT;
-        this.colorSelected = Color.BLACK;
     }
 
     public void handleMousePress(MouseEvent e){ //turn into switch statement depending on different mouse presses?
         this.prevLoc = new Point2D(e.getX(),e.getY());
         switch(currOption) {
             case RECTANGLE:
-                SketchyRectangle rect = new SketchyRectangle(this.prevLoc,canvasPane);
+                SketchyRectangle rect = new SketchyRectangle(this.prevLoc,canvasPane, this.colorSelected);
                 this.shapeStack.push(rect);
                 System.out.println(shapeStack.isEmpty());
                 break;
             case ELLIPSE:
-                SketchyEllipse ellipse = new SketchyEllipse(this.prevLoc,canvasPane);
+                SketchyEllipse ellipse = new SketchyEllipse(this.prevLoc,canvasPane, this.colorSelected);
                 this.shapeStack.push(ellipse); //adding resize lines for setOnMouseDragged removes bugs? maybe
                 break;
             case PEN:
@@ -80,6 +79,8 @@ public class Canvas {
             case PEN:
                 line.addPoint(f.getX(),f.getY());
                 break;
+            case RECTANGLE:
+                this.shapeStack.get(this.shapeStack.size()-1).resize(dragLoc);
             case ELLIPSE:
                 this.shapeStack.get(this.shapeStack.size()-1).resize(dragLoc);
             default:

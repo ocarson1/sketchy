@@ -48,6 +48,7 @@ public class Control {
         Label label2 = new Label("Set the Color");
         ColorPicker colorPicker = new ColorPicker();
         colorPicker.setValue(Color.GREY);
+        canvas.setColor(colorPicker.getValue());
         colorPicker.setOnAction((ActionEvent e) -> canvas.setColor(colorPicker.getValue()));
         this.buttonPane.getChildren().addAll(label1, rb1, rb2, rb3, rb4, label2, colorPicker);
     //}

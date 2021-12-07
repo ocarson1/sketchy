@@ -9,9 +9,9 @@ public class SketchyEllipse implements SketchyShape {
     private Ellipse ellipse;
     private Pane pane;
 
-    public SketchyEllipse(Point2D point, Pane myPane){
-        this.ellipse = new Ellipse(point.getX(), point.getY(),80,40);
-        this.ellipse.setFill(Color.PURPLE);
+    public SketchyEllipse(Point2D point, Pane myPane, Color color){
+        this.ellipse = new Ellipse(point.getX(), point.getY(),0,0);
+        this.ellipse.setFill(color);
         this.pane = myPane;
         this.pane.getChildren().add(ellipse);
     }

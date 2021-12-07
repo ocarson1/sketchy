@@ -10,9 +10,9 @@ public class SketchyRectangle implements SketchyShape {
     private Rectangle rect;
     private Pane pane;
 
-    public SketchyRectangle(Point2D point, Pane myPane){
-        this.rect = new Rectangle(point.getX(), point.getY(), 100,100);
-        this.rect.setFill(Color.BLUE);
+    public SketchyRectangle(Point2D point, Pane myPane, Color color){
+        this.rect = new Rectangle(point.getX(), point.getY(), 0,0);
+        this.rect.setFill(color);
         this.pane = myPane;
         this.pane.getChildren().add(rect);
     }
@@ -84,19 +84,20 @@ public class SketchyRectangle implements SketchyShape {
 
     @Override
     public void resize(Point2D point){
-        double prevWidth = this.rect.getWidth();
-        double prevHeight = this.rect.getHeight();
-        double dx = point.getX() - this.getCenter().getX();
-        //System.out.println(dx);
-        double dy = point.getY() - this.getCenter().getY();
-        this.rect.setWidth(2*dx);
-        this.rect.setHeight(2*dy);
-        System.out.println((this.rect.getWidth()-prevWidth)));
-        //this.rect.setX(this.rect.getX() - (this.rect.getWidth()-prevWidth));
-        //this.rect.setY(this.rect.getY() - (this.rect.getHeight()-prevHeight));
+        Point2D center = this.getCenter();
+        double dx = point.getX() - center.getX() - this.rect.getWidth()/2;
+        double dy = point.getY() - center.getY() - this.rect.getHeight()/2;
+        this.expandX(dx);
+        this.expandY(dy);
+    }
 
-        //this.rect.setX(this.getX()-(this.rect.getWidth()) - prevWidth);
-        //this.rect.setX(this.getX() - (this.getX() + this.getCenter().getX()));
-        //this.rect.setY(this.getY() - (this.getY() + this.getCenter().getY()));
+    public void expandX(double n){
+        this.rect.setX(this.getX() - n);
+        this.rect.setWidth(this.rect.getWidth() + 2*n);
+    }
+
+    public void expandY(double n){
+        this.rect.setY(this.getY() - n);
+        this.rect.setHeight(this.rect.getHeight() + 2*n);
     }
 }
