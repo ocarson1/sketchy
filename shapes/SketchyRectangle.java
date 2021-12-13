@@ -14,7 +14,12 @@ public class SketchyRectangle implements SketchyShape {
         this.rect = new Rectangle(point.getX(), point.getY(), 0,0);
         this.rect.setFill(color);
         this.pane = myPane;
-        this.pane.getChildren().add(rect);
+        this.create(this.pane.getChildren().size());
+    }
+
+    @Override
+    public void create(int paneIndex) { //takes this index in so that undo can create preserve a shape's index.
+        this.pane.getChildren().add(paneIndex,this.rect);
     }
 
     @Override
@@ -99,5 +104,20 @@ public class SketchyRectangle implements SketchyShape {
     public void expandY(double n){
         this.rect.setY(this.getY() - n);
         this.rect.setHeight(this.rect.getHeight() + 2*n);
+    }
+
+    @Override
+    public void addToPane(int x){
+        this.pane.getChildren().add(x,rect);
+    }
+
+    @Override
+    public int getIndex() {
+        return this.pane.getChildren().indexOf(rect);
+    }
+
+    @Override
+    public Color getColor() {
+        return (Color) this.rect.getFill();
     }
 }

@@ -60,14 +60,18 @@ public class Control {
         Button button2 = new Button("Delete");
         button2.setOnAction((ActionEvent e) -> this.canvas.deleteShape());
         Button button3 = new Button("Raise");
+        button3.setOnAction((ActionEvent e) -> this.canvas.raise());
         Button button4 = new Button("Lower");
+        button4.setOnAction((ActionEvent e) -> this.canvas.lower());
         this.buttonPane.getChildren().addAll(label, button1, button2, button3, button4);
     }
 
     public void setUpOperations(){
         Label label = new Label("Operations");
         Button button1 = new Button("Undo");
+        button1.setOnAction((ActionEvent e) -> this.canvas.undoIsPressed());
         Button button2 = new Button("Redo");
+        button2.setOnAction((ActionEvent e) -> this.canvas.redoIsPressed());
         Button button3 = new Button("Save");
         Button button4 = new Button("Load");
         this.buttonPane.getChildren().addAll(label, button1, button2, button3, button4);

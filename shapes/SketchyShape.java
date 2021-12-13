@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 
 public interface SketchyShape {
 
+    void create(int paneIndex);
     void select();
     void deselect();
     boolean checkContains(Point2D point);
@@ -17,5 +18,8 @@ public interface SketchyShape {
     Point2D getCenter();
     double getRotate();
     void resize(Point2D pointToResize);
+    void addToPane(int x);
+    int getIndex();
+    Color getColor();
 
 }

@@ -13,9 +13,13 @@ public class SketchyEllipse implements SketchyShape {
         this.ellipse = new Ellipse(point.getX(), point.getY(),0,0);
         this.ellipse.setFill(color);
         this.pane = myPane;
-        this.pane.getChildren().add(ellipse);
+        this.create(this.pane.getChildren().size());
     }
 
+    @Override
+    public void create(int paneIndex){
+        this.pane.getChildren().add(paneIndex, this.ellipse);
+    }
     @Override
     public void select(){
             this.ellipse.setStroke(Color.BLACK);
@@ -39,7 +43,7 @@ public class SketchyEllipse implements SketchyShape {
 
     @Override
     public void delete(){
-        this.pane.getChildren().remove(ellipse);
+        this.pane.getChildren().remove(this.ellipse);
     }
 
     @Override
@@ -86,5 +90,20 @@ public class SketchyEllipse implements SketchyShape {
         double dy = point.getY() - this.getCenter().getY();
         this.ellipse.setRadiusX(Math.abs(dx));
         this.ellipse.setRadiusY(Math.abs(dy));
+    }
+
+    @Override
+    public void addToPane(int x){
+        this.pane.getChildren().add(x,this.ellipse);
+    }
+
+    @Override
+    public int getIndex() {
+        return this.pane.getChildren().indexOf(this.ellipse);
+    }
+
+    @Override
+    public Color getColor() {
+        return (Color) this.ellipse.getFill();
     }
 }
