@@ -1,5 +1,6 @@
 package sketchy.shapes;
 
+import cs15.fnl.sketchySupport.CS15FileIO;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -45,7 +46,7 @@ public class SketchyRectangle implements SketchyShape {
 
     @Override
     public void delete(){
-        this.pane.getChildren().remove(rect);
+        this.pane.getChildren().remove(this.rect);
     }
 
     @Override
@@ -53,9 +54,7 @@ public class SketchyRectangle implements SketchyShape {
         double dx = curr.getX() - prev.getX();
         double dy = curr.getY() - prev.getY();
         this.rect.setX(this.rect.getX()+dx);
-        //this.rect.setX(this.rect.getX() + dx);
         this.rect.setY(this.rect.getY()+dy);
-        //this.rect.setY(this.rect.getY() + dy);
     }
 
 
@@ -69,6 +68,11 @@ public class SketchyRectangle implements SketchyShape {
     @Override
     public double getRotate(){
         return this.rect.getRotate();
+    }
+
+    @Override
+    public void setRotate(double angle){
+        this.rect.setRotate(angle);
     }
 
     @Override
@@ -90,15 +94,15 @@ public class SketchyRectangle implements SketchyShape {
     @Override
     public void resize(Point2D point){
         Point2D center = this.getCenter();
-        double dx = point.getX() - center.getX() - this.rect.getWidth()/2;
-        double dy = point.getY() - center.getY() - this.rect.getHeight()/2;
+        double dx = Math.abs(point.getX() - center.getX()) - this.rect.getWidth()/2;
+        double dy = Math.abs(point.getY() - center.getY()) - this.rect.getHeight()/2;
         this.expandX(dx);
         this.expandY(dy);
     }
 
     public void expandX(double n){
-        this.rect.setX(this.getX() - n);
-        this.rect.setWidth(this.rect.getWidth() + 2*n);
+        this.rect.setX((this.getX() - n));
+        this.rect.setWidth((this.rect.getWidth() + 2*n));
     }
 
     public void expandY(double n){
@@ -107,17 +111,54 @@ public class SketchyRectangle implements SketchyShape {
     }
 
     @Override
-    public void addToPane(int x){
-        this.pane.getChildren().add(x,rect);
-    }
-
-    @Override
     public int getIndex() {
-        return this.pane.getChildren().indexOf(rect);
+        return this.pane.getChildren().indexOf(this.rect);
     }
 
     @Override
     public Color getColor() {
         return (Color) this.rect.getFill();
+    }
+
+    @Override
+    public void save(CS15FileIO io){};
+
+
+
+
+
+
+
+
+    //*******************
+
+
+    public String getType(){
+        return "rect";
+    }
+
+
+    public double getRed(){
+        return ((Color) this.rect.getFill()).getRed();
+    }
+
+
+    public double getGreen(){
+        return ((Color) this.rect.getFill()).getGreen();
+    }
+
+
+    public double getBlue(){
+        return ((Color) this.rect.getFill()).getBlue();
+    }
+
+
+    public double getPoints(int i) {
+        return 1;
+    }
+
+
+    public double getSize(){
+        return 1;
     }
 }

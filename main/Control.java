@@ -7,6 +7,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import javax.swing.*;
+
 public class Control {
     private VBox buttonPane;
     private Canvas canvas;
@@ -73,7 +75,9 @@ public class Control {
         Button button2 = new Button("Redo");
         button2.setOnAction((ActionEvent e) -> this.canvas.redoIsPressed());
         Button button3 = new Button("Save");
+        button3.setOnAction((ActionEvent e) -> this.canvas.save());
         Button button4 = new Button("Load");
+        button4.setOnAction((ActionEvent e) -> this.canvas.load());
         this.buttonPane.getChildren().addAll(label, button1, button2, button3, button4);
     }
 

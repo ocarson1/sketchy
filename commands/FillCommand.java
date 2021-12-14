@@ -16,12 +16,12 @@ public class FillCommand implements Command {
 
     @Override
     public void undo(){
-        this.myShape.fill(prevColor);
+        this.myShape.fill(this.prevColor);
     }
 
     @Override
     public void redo(){
-        this.myShape.fill(currColor);
+        this.myShape.fill(this.currColor);
     }
 }
 

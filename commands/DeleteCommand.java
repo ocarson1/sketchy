@@ -10,19 +10,20 @@ public class DeleteCommand implements Command{
     private int arrayIndex;
     private ArrayList<SketchyShape> myList;
 
-    public DeleteCommand(SketchyShape shape, int index, ArrayList shapeList) {
-        this.myShape = shape; // all of these private variables are being saved so that they are stored within the instance.
-        this.paneIndex = index; //maybe edit to take in the entire arraylist as a parameter and establish the first on on the area list as the shape?
-        this.arrayIndex = shapeList.size()-1;
+    public DeleteCommand(SketchyShape shape, ArrayList<SketchyShape> shapeList) {
+        this.myShape = shape;
+        this.paneIndex = shape.getIndex();
+        this.arrayIndex = shapeList.indexOf(shape);
         this.myList = shapeList;
     }
 
-    public void undo() { //bug here is because delete changing the size of everything when it is called in canvas)
-        this.myShape.create(this.paneIndex-1); //shifts everything in front of it in the list of children forwards
-        this.myList.add(this.arrayIndex, this.myShape);
+    @Override
+    public void undo() {
+        this.myShape.create(this.paneIndex);
+        this.myList.add(this.arrayIndex,this.myShape);
     }
 
-
+    @Override
     public void redo(){
         this.myShape.delete();
         this.myList.remove(this.myShape);

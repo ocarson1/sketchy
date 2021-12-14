@@ -1,6 +1,5 @@
 package sketchy.commands;
 
-import javafx.geometry.Point2D;
 import sketchy.shapes.SketchyShape;
 
 import java.util.ArrayList;
@@ -16,17 +15,17 @@ public class CreateCommand implements Command {
         this.paneIndex = index; //maybe edit to take in the entire arraylist as a parameter and establish the first on on the area list as the shape?
         this.arrayIndex = shapeList.size()-1;
         this.myList = shapeList;
-
     }
 
+    @Override
     public void undo() {
         this.myShape.delete();
         this.myList.remove(this.myShape);
     }
 
+    @Override
     public void redo(){
         this.myShape.create(this.paneIndex);
         this.myList.add(this.arrayIndex, this.myShape);
     }
-
 }

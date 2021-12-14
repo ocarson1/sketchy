@@ -1,5 +1,6 @@
 package sketchy.shapes;
 
+import cs15.fnl.sketchySupport.CS15FileIO;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -64,12 +65,16 @@ public class SketchyEllipse implements SketchyShape {
         return this.ellipse.getRotate();
     }
 
+    @Override
+    public void setRotate(double angle){
+        this.ellipse.setRotate(angle);
+    }
+
 
     public double getX(){
         System.out.println(this.ellipse.getCenterX());
         return this.ellipse.getCenterX();
     }
-
 
     public double getY(){
         System.out.println(this.ellipse.getCenterY());
@@ -93,11 +98,6 @@ public class SketchyEllipse implements SketchyShape {
     }
 
     @Override
-    public void addToPane(int x){
-        this.pane.getChildren().add(x,this.ellipse);
-    }
-
-    @Override
     public int getIndex() {
         return this.pane.getChildren().indexOf(this.ellipse);
     }
@@ -105,5 +105,39 @@ public class SketchyEllipse implements SketchyShape {
     @Override
     public Color getColor() {
         return (Color) this.ellipse.getFill();
+    }
+
+    @Override
+    public void save(CS15FileIO io){};
+
+    //**************************************
+
+    public String getType(){
+        return "ellipse";
+    }
+
+
+    public double getRed(){
+        return ((Color) this.ellipse.getFill()).getRed();
+    }
+
+
+    public double getGreen(){
+        return ((Color) this.ellipse.getFill()).getGreen();
+    }
+
+
+    public double getBlue(){
+        return ((Color) this.ellipse.getFill()).getBlue();
+    }
+
+
+    public double getPoints(int i) {
+        return 1;
+    }
+
+
+    public double getSize(){
+        return 1;
     }
 }

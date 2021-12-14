@@ -3,7 +3,7 @@ package sketchy.shapes;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
-public interface SketchyShape {
+public interface SketchyShape extends Saveable{
 
     void create(int paneIndex);
     void select();
@@ -17,8 +17,8 @@ public interface SketchyShape {
     void rotate(Point2D rotatePrev, Point2D rotateCurr);
     Point2D getCenter();
     double getRotate();
+    void setRotate(double angle);
     void resize(Point2D pointToResize);
-    void addToPane(int x);
     int getIndex();
     Color getColor();
 
